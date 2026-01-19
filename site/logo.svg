@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-label="Je Conduis logo">
+  <!-- Simple illustrative logo: steering wheel + leaf + text -->
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#10B981"/>
+      <stop offset="100%" stop-color="#34D399"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(20,20)">
+    <!-- steering wheel circle -->
+    <circle cx="80" cy="80" r="70" fill="#0F1724" />
+    <path d="M80 20 A60 60 0 1 1 79.9 20" fill="#0F1724" opacity="0.95" />
+    <!-- inner spokes -->
+    <circle cx="80" cy="80" r="28" fill="#FFFFFF"/>
+    <path d="M80 80 L50 40" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+    <path d="M80 80 L110 40" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round"/>
+    <!-- leaf -->
+    <path d="M120 30 C160 10 190 60 140 90 C120 70 110 50 120 30" fill="url(#g1)" transform="rotate(-12 140 60)"/>
+  </g>
+  <!-- Text -->
+  <g transform="translate(240,140)">
+    <text x="0" y="0" font-family="Montserrat, Inter, Arial" font-size="86" font-weight="700" fill="#10B981">Je</text>
+    <text x="110" y="0" font-family="Montserrat, Inter, Arial" font-size="86" font-weight="700" fill="#0EA5E9">Conduis</text>
+  </g>
+</svg>
