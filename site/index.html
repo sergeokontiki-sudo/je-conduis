@@ -1,1003 +1,208 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Je Conduis — Démo UI Éco</title>
-
-  <!-- Fonts (Google Fonts) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Je Conduis — Full Écran Rectangles</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&family=Roboto:wght@500&display=swap" rel="stylesheet">
-
   <style>
-    :root{
-      --eco-primary: #10B981;
-      --eco-secondary: #34D399;
-      --eco-blue: #0EA5E9;
-      --eco-yellow: #FCD34D;
-      --eco-grey: #6B7280;
-      --eco-light: #E5E7EB;
-      --eco-white: #F8FAFC;
-      --eco-dark: #111827;
-
-      --radius: 0px; /* RECTANGLE : pas d'arrondi */
-      --shadow: 0 2px 8px rgba(17, 24, 39, 0.08);
-      --shadow-soft: 0 1px 4px rgba(17, 24, 39, 0.06);
-      --max: 100%; /* PLEINE LARGEUR */
+    :root {
+      --primary: #10B981; --secondary: #34D399; --blue: #0EA5E9;
+      --yellow: #FCD34D; --grey: #6B7280; --light: #E5E7EB;
+      --white: #F8FAFC; --dark: #111827; --radius: 0px; /* Rectangles ! */
     }
-
-    *{ box-sizing: border-box; }
-    html,body{ height:100%; margin:0; }
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Arial, sans-serif;
-      color: var(--eco-dark);
-      background: #fff;
+    * { box-sizing: border-box; margin: 0; }
+    html, body { height: 100%; font-family: Inter, sans-serif; color: var(--dark); }
+    
+    /* HEADER */
+    header { position: sticky; top: 0; z-index: 50; background: rgba(248,250,252,0.98); border-bottom: 2px solid var(--light); }
+    .nav { max-width: 1920px; margin: 0 auto; padding: 16px clamp(18px,3vw,60px); display: flex; justify-content: space-between; align-items: center; }
+    .brand { font-family: Montserrat, sans-serif; font-weight: 700; font-size: 20px; color: var(--dark); }
+    nav ul { display: flex; gap: 24px; list-style: none; padding: 0; font-size: 15px; }
+    .nav-cta { background: var(--primary); color: white; padding: 12px 24px; border-radius: 999px; font-weight: 500; }
+    
+    /* HERO FULL ÉCRAN */
+    .hero { 
+      height: 100vh; min-height: 600px; 
+      background: linear-gradient(135deg, var(--blue) 0%, var(--primary) 100%);
+      display: flex; align-items: center; justify-content: center; color: white; text-align: center; position: relative; overflow: hidden;
     }
-
-    a{ color: var(--eco-blue); text-decoration: none; }
-    a:hover{ color: var(--eco-secondary); }
-
-    .container{ 
-      max-width: var(--max); 
-      margin: 0 auto; 
-      padding: 0 clamp(18px, 3vw, 60px); /* Responsive padding */
+    .hero::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700"><rect width="1200" height="700" fill="%23ffffff" opacity="0.1"/></svg>') center/cover;
     }
-
-    /* Header */
-    header{
-      position: sticky;
-      top:0;
-      z-index: 50;
-      backdrop-filter: blur(10px);
-      background: rgba(248,250,252,0.98);
-      border-bottom: 2px solid var(--eco-light);
+    .hero-content { position: relative; z-index: 2; max-width: 900px; padding: 0 20px; }
+    .hero h1 { font-family: Montserrat, sans-serif; font-size: clamp(48px,8vw,96px); font-weight: 700; margin: 0 0 24px; line-height: 1.1; }
+    .hero p { font-size: clamp(18px,3vw,28px); margin: 0 0 40px; opacity: 0.95; }
+    .hero-buttons { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; }
+    .btn { padding: 16px 32px; border-radius: 999px; font-weight: 500; text-decoration: none; font-size: 16px; }
+    .btn-primary { background: white; color: var(--dark); }
+    .btn-secondary { background: rgba(255,255,255,0.2); color: white; border: 2px solid white; }
+    
+    /* SECTION ARTICLES - RECTANGLES */
+    .articles { padding: 80px 0; background: var(--light); }
+    .container { max-width: 1920px; margin: 0 auto; padding: 0 clamp(20px,4vw,80px); }
+    .section-title { text-align: center; margin-bottom: 60px; }
+    .section-title h2 { font-family: Montserrat, sans-serif; font-size: clamp(32px,6vw,64px); color: var(--dark); margin: 0 0 16px; }
+    .section-title p { font-size: 20px; color: var(--grey); max-width: 600px; margin: 0 auto; }
+    
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 24px; }
+    .card { 
+      background: white; border-radius: var(--radius); /* 0px = rectangle parfait */
+      overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
-    .nav{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding: 16px clamp(18px, 3vw, 60px);
-      max-width: 1920px;
-      margin: 0 auto;
+    .card:hover { transform: translateY(-8px); box-shadow: 0 30px 80px rgba(0,0,0,0.15); }
+    .card-image { 
+      width: 100%; height: 280px; /* Rectangle fixe */
+      object-fit: cover; display: block;
     }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-family: Montserrat, Inter, sans-serif;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-      color: var(--eco-dark);
-      transition: all 200ms ease;
+    .card-image-placeholder {
+      width: 100%; height: 280px; background: linear-gradient(135deg, #f0f0f0 0%, #e0e0e0 100%);
+      display: flex; align-items: center; justify-content: center; font-size: 24px; color: var(--grey);
     }
-    .brand img {
-      height: 36px;
-      width: auto;
-      display: block;
+    .card-body { padding: 32px; }
+    .card-tag { 
+      display: inline-block; background: var(--primary); color: white; 
+      padding: 8px 16px; border-radius: 999px; font-size: 12px; font-weight: 600; text-transform: uppercase;
     }
-    .brand:hover{ transform: translateY(-1px); }
-
-    .search{
-      flex: 1;
-      display:flex;
-      justify-content:center;
-      max-width: 600px;
+    .card h3 { 
+      font-family: Montserrat, sans-serif; font-size: 24px; margin: 16px 0 12px; color: var(--dark); 
     }
-    .search input{
-      width:100%;
-      padding: 12px 18px;
-      border-radius: 0;
-      border: 2px solid var(--eco-light);
-      background: #fff;
-      outline: none;
-      color: var(--eco-dark);
-      font-size: 14px;
-    }
-    .search input:focus{
-      border-color: var(--eco-blue);
-      box-shadow: 0 0 0 3px rgba(14,165,233,0.10);
-    }
-
-    nav ul{
-      list-style:none;
-      display:flex;
-      align-items:center;
-      gap: 20px;
-      padding:0;
-      margin:0;
-      font-size: 14px;
-      color: var(--eco-dark);
-      white-space: nowrap;
-    }
-    nav ul li a{
-      font-weight: 500;
-      transition: all 150ms;
-    }
-    nav ul li a:hover{
-      color: var(--eco-primary);
-    }
-    .nav-cta{
-      font-family: Roboto, Inter, sans-serif;
-      font-weight: 500;
-      padding: 12px 18px;
-      border-radius: 0;
-      background: var(--eco-primary);
-      color: #fff !important;
-      box-shadow: 0 4px 12px rgba(16,185,129,0.25);
-      border: 2px solid var(--eco-primary);
-      transition: all 200ms;
-    }
-    .nav-cta:hover{ 
-      background: #059669; 
-      border-color: #059669;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(16,185,129,0.35);
-    }
-
-    /* Mobile menu */
-    .burger{
-      display:none;
-      border: 2px solid var(--eco-light);
-      background: #fff;
-      padding: 10px 12px;
-      border-radius: 0;
-      cursor: pointer;
-    }
-    .burger span{
-      display:block;
-      width: 22px;
-      height: 3px;
-      background: var(--eco-dark);
-      margin: 4px 0;
-      border-radius: 0;
-    }
-
-    @media (max-width: 1200px){
-      .search{ max-width: 400px; }
-    }
-    @media (max-width: 980px){
-      .search{ display:none; }
-      nav ul{ display:none; }
-      .burger{ display:block; }
-    }
-
-    /* Hero PLEINE LARGEUR */
-    .hero{
-      padding: 0;
-      background: linear-gradient(180deg, var(--eco-white), var(--eco-light));
-    }
-    .hero-grid{
-      display:grid;
-      grid-template-columns: 1.5fr 1fr;
-      gap: 0;
-      align-items: stretch;
-      max-width: 1920px;
-      margin: 0 auto;
-    }
-    .hero-card{
-      border-radius: 0;
-      overflow:hidden;
-      box-shadow: none;
-      border: none;
-      background: #fff;
-      position: relative;
-      min-height: 520px;
-    }
-    .hero-media img{
-      width:100%;
-      height: 520px;
-      object-fit: cover;
-      display:block;
-    }
-    .hero-overlay{
-      position:absolute;
-      inset:0;
-      background: linear-gradient(90deg, rgba(17,24,39,0.72), rgba(17,24,39,0.12));
-    }
-    .hero-content{
-      position:absolute;
-      inset:0;
-      padding: clamp(24px, 4vw, 60px);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      gap: 16px;
-      color: #fff;
-    }
-    .hero-title{
-      font-family: Montserrat, Inter, sans-serif;
-      font-size: clamp(28px, 4vw, 52px);
-      line-height: 1.1;
-      margin: 0;
-      max-width: 18ch;
-    }
-    .hero-sub{
-      margin:0;
-      max-width: 50ch;
-      color: rgba(255,255,255,0.95);
-      font-size: clamp(14px, 1.2vw, 18px);
-      line-height: 1.6;
-    }
-    .hero-actions{
-      display:flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      padding: 16px 24px;
-      border-radius: 0;
-      border: 2px solid rgba(255,255,255,0.25);
-      color: #fff;
-      font-family: Roboto, Inter, sans-serif;
-      font-weight: 500;
-      cursor: pointer;
-      user-select:none;
-      font-size: 15px;
-      transition: all 200ms;
-    }
-    .btn-primary{
-      background: var(--eco-primary);
-      border-color: var(--eco-primary);
-      box-shadow: 0 8px 20px rgba(16,185,129,0.30);
-    }
-    .btn-primary:hover{
-      background: #059669;
-      border-color: #059669;
-      transform: translateY(-3px);
-      box-shadow: 0 12px 28px rgba(16,185,129,0.40);
-    }
-    .btn-ghost{
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(8px);
-    }
-    .btn-ghost:hover{
-      background: rgba(255,255,255,0.20);
-    }
-
-    .hero-side{
-      display:flex;
-      flex-direction:column;
-      gap: 0;
-      background: var(--eco-light);
-    }
-    .mini{
-      border-radius: 0;
-      background: #fff;
-      border: none;
-      border-bottom: 2px solid var(--eco-light);
-      box-shadow: none;
-      padding: clamp(20px, 3vw, 40px);
-      flex: 1;
-    }
-    .mini:last-child{
-      border-bottom: none;
-    }
-    .mini h3{
-      font-family: Montserrat, Inter, sans-serif;
-      font-size: clamp(16px, 1.5vw, 20px);
-      margin:0 0 12px;
-      color: var(--eco-dark);
-    }
-    .mini p{
-      margin:0 0 16px;
-      color: var(--eco-grey);
-      font-size: clamp(13px, 1.1vw, 15px);
-      line-height: 1.6;
-    }
-    .pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap: 10px;
-    }
-    .pill{
-      font-size: 13px;
-      padding: 10px 14px;
-      border-radius: 0;
-      border: 2px solid rgba(107,114,128,0.20);
-      background: rgba(229,231,235,0.50);
-      color: var(--eco-dark);
-      font-weight: 500;
-    }
-    .pill strong{ color: var(--eco-primary); font-weight: 600; }
-
-    @media (max-width: 980px){
-      .hero-grid{ grid-template-columns: 1fr; }
-      .hero-media img{ height: 360px; }
-      .hero-card{ min-height: 360px; }
-    }
-
-    /* Sections PLEINE LARGEUR */
-    section{ 
-      padding: clamp(40px, 6vw, 80px) 0; 
-      border-bottom: 2px solid var(--eco-light);
-    }
-    section:last-of-type{
-      border-bottom: none;
-    }
-    .section-title{
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-between;
-      gap: 16px;
-      margin-bottom: clamp(20px, 3vw, 40px);
-      padding: 0 clamp(18px, 3vw, 60px);
-      max-width: 1920px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .section-title h2{
-      margin:0;
-      font-family: Montserrat, Inter, sans-serif;
-      font-size: clamp(24px, 3vw, 36px);
-      color: var(--eco-dark);
-    }
-    .section-title p{
-      margin:0;
-      color: var(--eco-grey);
-      font-size: clamp(13px, 1.2vw, 16px);
-    }
-
-    /* Cards */
-    .grid-3{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 2px;
-      background: var(--eco-light);
-      max-width: 1920px;
-      margin: 0 auto;
-    }
-    .card{
-      background:#fff;
-      border: none;
-      border-radius: 0;
-      overflow:hidden;
-      box-shadow: none;
-      display:flex;
-      flex-direction:column;
-      min-height: 100%;
-      transition: all 250ms;
-    }
-    .card:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(17, 24, 39, 0.15);
-    }
-    .card img{
-      width:100%;
-      height: 220px;
-      object-fit: cover;
-      display:block;
-    }
-    .card-body{ padding: clamp(16px, 2.5vw, 28px); }
-    .meta{
-      display:flex;
-      gap: 12px;
-      flex-wrap:wrap;
-      color: var(--eco-grey);
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
-    .tag{
-      background: rgba(16,185,129,0.10);
-      border: 2px solid rgba(16,185,129,0.30);
-      color: var(--eco-primary);
-      padding: 6px 12px;
-      border-radius: 0;
-      font-size: 12px;
-      display:inline-flex;
-      align-items:center;
-      gap: 6px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .card h3{
-      margin: 10px 0 8px;
-      font-family: Montserrat, Inter, sans-serif;
-      font-size: clamp(16px, 1.5vw, 20px);
-      color: var(--eco-dark);
-      line-height: 1.3;
-    }
-    .card p{
-      margin:0;
-      color: var(--eco-grey);
-      font-size: clamp(13px, 1.1vw, 15px);
-      line-height: 1.6;
-    }
-
-    @media (max-width: 980px){
-      .grid-3{ grid-template-columns: 1fr; gap: 2px; }
-    }
-
-    /* Rubriques COULEURS PAR CATÉGORIE */
-    .rubriques{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 2px;
-      background: var(--eco-light);
-      max-width: 1920px;
-      margin: 0 auto;
-    }
-    .rub{
-      background: #fff;
-      border: none;
-      border-radius: 0;
-      padding: clamp(20px, 3vw, 32px);
-      box-shadow: none;
-      transition: all 250ms;
-      position: relative;
-      overflow: hidden;
-    }
-    .rub::before{
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 6px;
-      background: var(--rub-color, #6B7280);
-    }
-    .rub:hover{
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(17, 24, 39, 0.12);
+    .card p { color: var(--grey); line-height: 1.6; margin: 0; }
+    .card-link { 
+      display: inline-flex; align-items: center; gap: 8px; color: var(--primary); 
+      font-weight: 600; margin-top: 20px; font-size: 15px;
     }
     
-    /* COULEURS SPÉCIFIQUES PAR RUBRIQUE */
-    .rub-reparations{ --rub-color: #10B981; } /* Vert */
-    .rub-assurance{ --rub-color: #0EA5E9; } /* Bleu */
-    .rub-achat{ --rub-color: #F59E0B; } /* Orange */
-    .rub-vente{ --rub-color: #8B5CF6; } /* Violet */
-    .rub-location{ --rub-color: #EC4899; } /* Rose */
-    .rub-economies{ --rub-color: #FCD34D; } /* Jaune */
-    .rub-nouveautes{ --rub-color: #EF4444; } /* Rouge */
-    .rub-blog{ --rub-color: #6B7280; } /* Gris */
-
-    .rub .rub-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-    .rub h4{
-      margin:0;
-      font-family: Montserrat, Inter, sans-serif;
-      font-size: clamp(15px, 1.3vw, 18px);
-      color: var(--eco-dark);
-      font-weight: 700;
-    }
-    .rub .count{
-      font-size: 13px;
-      color: var(--eco-grey);
-      background: var(--eco-light);
-      padding: 8px 14px;
-      border-radius: 0;
-      border: 2px solid var(--eco-light);
-      font-weight: 600;
-    }
-    .rub p{
-      margin:0;
-      color: var(--eco-grey);
-      font-size: clamp(13px, 1.1vw, 15px);
-      line-height: 1.6;
-    }
-
-    @media (max-width: 980px){
-      .rubriques{ grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 520px){
-      .rubriques{ grid-template-columns: 1fr; }
-    }
-
-    /* Newsletter */
-    .newsletter{
-      background: var(--eco-primary);
-      border: none;
-      border-radius: 0;
-      box-shadow: none;
-      padding: clamp(32px, 5vw, 60px);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-      max-width: 1920px;
-      margin: 0 auto;
-    }
-    .newsletter h3{
-      margin:0 0 8px;
-      font-family: Montserrat, Inter, sans-serif;
-      font-size: clamp(22px, 2.5vw, 32px);
-      color: #fff;
-    }
-    .newsletter p{
-      margin:0;
-      color: rgba(255,255,255,0.90);
-      font-size: clamp(14px, 1.2vw, 16px);
-      line-height: 1.6;
-      max-width: 60ch;
-    }
-    .nl-form{
-      display:flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      width: min(600px, 100%);
-    }
-    .nl-form input{
-      flex: 1;
-      min-width: 240px;
-      padding: 16px 18px;
-      border-radius: 0;
-      border: 2px solid rgba(255,255,255,0.30);
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(8px);
-      outline: none;
-      color: #fff;
-      font-size: 15px;
-    }
-    .nl-form input::placeholder{
-      color: rgba(255,255,255,0.70);
-    }
-    .nl-form input:focus{
-      border-color: #fff;
-      background: rgba(255,255,255,0.20);
-    }
-    .nl-form button{
-      padding: 16px 28px;
-      border-radius: 0;
-      border: 2px solid #fff;
-      background: #fff;
-      color: var(--eco-primary);
-      font-family: Roboto, Inter, sans-serif;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 15px;
-      transition: all 200ms;
-    }
-    .nl-form button:hover{
-      background: #059669;
-      color: #fff;
-      border-color: #059669;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(17, 24, 39, 0.25);
-    }
-
-    /* Footer */
-    footer{
-      padding: clamp(40px, 5vw, 60px) clamp(18px, 3vw, 60px);
-      color: var(--eco-grey);
-      font-size: 14px;
-      background: var(--eco-dark);
-      color: rgba(255,255,255,0.70);
-    }
-    .footer-grid{
-      display:flex;
-      justify-content:space-between;
-      gap: 24px;
-      flex-wrap: wrap;
-      border-top: 2px solid rgba(255,255,255,0.10);
-      padding-top: clamp(24px, 3vw, 40px);
-      max-width: 1920px;
-      margin: 0 auto;
-    }
-    .footer-grid .brand{
-      color: #fff;
-    }
-    .footer-links{
-      display:flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .footer-links a{
-      color: rgba(255,255,255,0.70);
-      transition: all 150ms;
-    }
-    .footer-links a:hover{
-      color: var(--eco-primary);
-    }
-
-    /* Simple modal */
-    .modal{
-      position: fixed;
-      inset:0;
-      background: rgba(17,24,39,0.70);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding: 20px;
-      z-index: 100;
-      backdrop-filter: blur(4px);
-    }
-    .modal[open]{ display:flex; }
-    .modal-card{
-      width: min(600px, 100%);
-      background:#fff;
-      border-radius: 0;
-      border: 2px solid var(--eco-light);
-      box-shadow: 0 20px 60px rgba(17, 24, 39, 0.30);
-      padding: clamp(20px, 3vw, 32px);
-    }
-    .modal-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
-    .modal-head h3{
-      margin:0;
-      font-family: Montserrat, Inter, sans-serif;
-      font-size: clamp(18px, 2vw, 22px);
-    }
-    .close{
-      border: 2px solid var(--eco-light);
-      background: var(--eco-light);
-      border-radius: 0;
-      padding: 10px 16px;
-      cursor:pointer;
-      font-weight: 600;
-      transition: all 150ms;
-    }
-    .close:hover{
-      background: var(--eco-dark);
-      color: #fff;
-      border-color: var(--eco-dark);
-    }
-    .modal-card p{
-      margin: 0 0 16px;
-      color: var(--eco-grey);
-      font-size: 15px;
-      line-height: 1.6;
-    }
-    .modal-card .row{
-      display:flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .modal-card input{
-      flex: 1;
-      min-width: 240px;
-      padding: 14px 16px;
-      border-radius: 0;
-      border: 2px solid var(--eco-light);
-      outline: none;
-      font-size: 15px;
-    }
-    .modal-card input:focus{
-      border-color: var(--eco-blue);
-    }
-    .modal-card button{
-      padding: 14px 24px;
-      border-radius: 0;
-      border: 2px solid var(--eco-primary);
-      background: var(--eco-primary);
-      color:#fff;
-      font-family: Roboto, Inter, sans-serif;
-      font-weight: 600;
-      cursor:pointer;
-      font-size: 15px;
-      transition: all 200ms;
-    }
-    .modal-card button:hover{
-      background: #059669;
-      border-color: #059669;
-      transform: translateY(-2px);
+    /* FOOTER */
+    footer { background: var(--dark); color: white; padding: 60px 0 40px; text-align: center; }
+    .footer-content { max-width: 1200px; margin: 0 auto; padding: 0 20px; opacity: 0.8; }
+    
+    @media (max-width: 768px) {
+      .hero-buttons { flex-direction: column; align-items: center; }
+      .grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
-
 <body>
+  <!-- HEADER -->
   <header>
-    <div class="nav">
-      <a class="brand" href="#">
-        <img src="logo.svg" alt="Je Conduis" />
-      </a>
-
-      <div class="search" aria-label="Recherche">
-        <input type="search" placeholder="Rechercher : vidange, assurance, achat VO…" />
-      </div>
-
-      <nav aria-label="Menu principal">
-        <ul>
-          <li><a href="#">Réparations</a></li>
-          <li><a href="#">Assurance</a></li>
-          <li><a href="#">Achat</a></li>
-          <li><a href="#">Vente</a></li>
-          <li><a href="#">Location</a></li>
-          <li><a href="#">Économies</a></li>
-          <li><a href="#">Nouveautés</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a class="nav-cta" href="#" data-open-modal="lead">Checklist VO</a></li>
-        </ul>
-      </nav>
-
-      <button class="burger" aria-label="Ouvrir le menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
+    <nav class="nav">
+      <div class="brand">Je Conduis</div>
+      <ul>
+        <li><a href="reparations.html">Réparations</a></li>
+        <li><a href="assurance.html">Assurance</a></li>
+        <li><a href="achat.html">Achat</a></li>
+        <li><a href="#">Vente</a></li>
+        <li><a href="#">Économies</a></li>
+        <li><a href="#">Nouveautés</a></li>
+        <li><a class="nav-cta" href="#">Checklist Gratuite</a></li>
+      </ul>
+    </nav>
   </header>
 
-  <main>
-    <!-- HERO PLEINE LARGEUR -->
-    <div class="hero">
-      <div class="hero-grid">
-        <!-- Hero media -->
-        <div class="hero-card">
-          <div class="hero-media">
-            <img alt="Visuel automobile éco-responsable" src="data:image/svg+xml;utf8,
-              <svg xmlns='http://www.w3.org/2000/svg' width='1600' height='900'>
-                <defs>
-                  <linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>
-                    <stop offset='0' stop-color='%230EA5E9'/>
-                    <stop offset='0.55' stop-color='%2310B981'/>
-                    <stop offset='1' stop-color='%23111827'/>
-                  </linearGradient>
-                </defs>
-                <rect width='1600' height='900' fill='url(%23g)'/>
-                <text x='60' y='140' font-family='Inter, Arial' font-size='56' fill='%23FFFFFF' opacity='0.95' font-weight='700'>Je Conduis</text>
-                <text x='60' y='200' font-family='Inter, Arial' font-size='28' fill='%23FFFFFF' opacity='0.90'>Pleine largeur — Design rectangulaire</text>
-              </svg>" />
-          </div>
-
-          <div class="hero-overlay" aria-hidden="true"></div>
-
-          <div class="hero-content">
-            <h1 class="hero-title">Économise sur ta voiture, sans sacrifier la sécurité</h1>
-            <p class="hero-sub">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-            </p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#" data-open-modal="lead">Checklist Achat VO gratuite</a>
-              <a class="btn btn-ghost" href="#">Voir les derniers tutos</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Side cards -->
-        <div class="hero-side">
-          <div class="mini">
-            <h3>Astuce du jour</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer nec odio. Praesent libero.</p>
-            <div class="pill-row">
-              <span class="pill"><strong>-30%</strong> garage</span>
-              <span class="pill">Éco-conduite</span>
-              <span class="pill">Pneus</span>
-            </div>
-          </div>
-
-          <div class="mini">
-            <h3>Ce que tu trouveras ici</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis aute irure dolor in reprehenderit.</p>
-            <div class="pill-row">
-              <span class="pill">Réparations</span>
-              <span class="pill">Assurance</span>
-              <span class="pill">Achat/Vente</span>
-              <span class="pill">Location</span>
-              <span class="pill">Bons plans</span>
-            </div>
-          </div>
-        </div>
+  <!-- HERO FULL ÉCRAN -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Maîtrise ton auto, <br>maîtrise tes coûts</h1>
+      <p>Guides pratiques, checklists PDF et bons plans pour économiser <strong>2000€/an</strong> sur entretien et assurances.</p>
+      <div class="hero-buttons">
+        <a href="#" class="btn btn-primary">Commencer par la vidange</a>
+        <a href="#" class="btn btn-secondary">Voir tous les guides</a>
       </div>
     </div>
+  </section>
 
-    <!-- ARTICLES -->
-    <section>
+  <!-- ARTICLES RECTANGLES -->
+  <section class="articles">
+    <div class="container">
       <div class="section-title">
-        <h2>Derniers articles</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <h2>Derniers guides pratiques</h2>
+        <p>Des tutos testés, checklists PDF et comparatifs pour tous niveaux</p>
       </div>
-
-      <div class="grid-3">
+      
+      <div class="grid">
         <article class="card">
-          <img alt="Illustration vidange" src="data:image/svg+xml;utf8,
-            <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-              <defs>
-                <linearGradient id='a' x1='0' y1='0' x2='1' y2='1'>
-                  <stop offset='0' stop-color='%2310B981'/>
-                  <stop offset='1' stop-color='%230EA5E9'/>
-                </linearGradient>
-              </defs>
-              <rect width='1200' height='700' fill='url(%23a)'/>
-              <text x='90' y='200' font-family='Inter, Arial' font-size='50' fill='%23FFFFFF' opacity='0.95' font-weight='700'>Vidange</text>
-            </svg>" />
+          <div class="card-image-placeholder">
+            Image IA: Mécano vidange garage propre
+          </div>
           <div class="card-body">
-            <div class="meta">
-              <span class="tag">Réparations</span>
-              <span>Jan 2026</span>
-            </div>
-            <h3>Vidange maison : guide éco et sécurisé</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</p>
+            <span class="card-tag">Réparations</span>
+            <h3>Vidange maison : 30 min, 80€ d'économie</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Étapes détaillées pour Clio, 208, Mégane. Matériel, pièges à éviter, tableau économies.</p>
+            <a href="#" class="card-link">Lire le guide →</a>
           </div>
         </article>
 
         <article class="card">
-          <img alt="Illustration assurance" src="data:image/svg+xml;utf8,
-            <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-              <defs>
-                <linearGradient id='b' x1='0' y1='0' x2='1' y2='1'>
-                  <stop offset='0' stop-color='%23111827'/>
-                  <stop offset='1' stop-color='%230EA5E9'/>
-                </linearGradient>
-              </defs>
-              <rect width='1200' height='700' fill='url(%23b)'/>
-              <text x='90' y='200' font-family='Inter, Arial' font-size='50' fill='%23FFFFFF' opacity='0.95' font-weight='700'>Assurance</text>
-            </svg>" />
+          <div class="card-image-placeholder">
+            Image IA: Comparateur garages devis
+          </div>
           <div class="card-body">
-            <div class="meta">
-              <span class="tag">Assurance</span>
-              <span>Jan 2026</span>
-            </div>
-            <h3>Comparer les garanties sans se faire piéger</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nemo enim ipsam voluptatem quia voluptas sit aspernatur.</p>
+            <span class="card-tag">Économies</span>
+            <h3>Comparateurs garages : -40% sur révision</h3>
+            <p>Lorem ipsum dolor sit amet. IDGarages, Vroomly, Merci Paulo. 4300 garages comparés, 20€ offerts premier devis.</p>
+            <a href="#" class="card-link">Comparer maintenant →</a>
           </div>
         </article>
 
         <article class="card">
-          <img alt="Illustration achat vente" src="data:image/svg+xml;utf8,
-            <svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'>
-              <defs>
-                <linearGradient id='c' x1='0' y1='0' x2='1' y2='1'>
-                  <stop offset='0' stop-color='%2334D399'/>
-                  <stop offset='1' stop-color='%2310B981'/>
-                </linearGradient>
-              </defs>
-              <rect width='1200' height='700' fill='url(%23c)'/>
-              <text x='90' y='200' font-family='Inter, Arial' font-size='50' fill='%23FFFFFF' opacity='0.95' font-weight='700'>Achat</text>
-            </svg>" />
+          <div class="card-image-placeholder">
+            Image IA: Checklist achat VO
+          </div>
           <div class="card-body">
-            <div class="meta">
-              <span class="tag">Achat</span>
-              <span>Jan 2026</span>
-            </div>
-            <h3>Acheter une VO : checklist rapide</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minima veniam, quis nostrum exercitationem.</p>
+            <span class="card-tag">Achat VO</span>
+            <h3>Checklist 47 points achat occasion</h3>
+            <p>Lorem ipsum dolor sit amet. PDF gratuit : papiers, carrosserie, mécanique, négociation. Évite 2000€ de vices cachés.</p>
+            <a href="#" class="card-link">Télécharger PDF →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image-placeholder">
+            Image IA: Codes promo pièces auto
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Bons plans</span>
+            <h3>Codes promo pièces auto janvier 2026</h3>
+            <p>Lorem ipsum dolor sit amet. Piecesauto.fr -3%, AUTODOC -5%, livraison offerte Mister Auto. Tous testés.</p>
+            <a href="#" class="card-link">Copier codes →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image-placeholder">
+            Image IA: Assurance auto comparatif
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Assurance</span>
+            <h3>Meilleure assurance jeune conducteur</h3>
+            <p>Lorem ipsum dolor sit amet. Top 5 offres 2026, franchise expliquée, tous risques vs tiers.</p>
+            <a href="#" class="card-link">Comparer →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-image-placeholder">
+            Image IA: Éco-conduite compteur
+          </div>
+          <div class="card-body">
+            <span class="card-tag">Éco-conduite</span>
+            <h3>5 habitudes éco-conduite : -15% carburant</h3>
+            <p>Lorem ipsum dolor sit amet. Freinage anticipé, régime optimal, pneus gonflés. Checklist PDF incluse.</p>
+            <a href="#" class="card-link">Guide PDF →</a>
           </div>
         </article>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- RUBRIQUES AVEC COULEURS -->
-    <section>
-      <div class="section-title">
-        <h2>Rubriques</h2>
-        <p>8 catégories avec couleurs uniques</p>
-      </div>
-
-      <div class="rubriques">
-        <div class="rub rub-reparations">
-          <div class="rub-top">
-            <h4>Réparations Pratiques</h4>
-            <span class="count">15</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-
-        <div class="rub rub-assurance">
-          <div class="rub-top">
-            <h4>Assurance Auto</h4>
-            <span class="count">10</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-
-        <div class="rub rub-achat">
-          <div class="rub-top">
-            <h4>Achat</h4>
-            <span class="count">12</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-
-        <div class="rub rub-vente">
-          <div class="rub-top">
-            <h4>Vente</h4>
-            <span class="count">10</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-
-        <div class="rub rub-location">
-          <div class="rub-top">
-            <h4>Location</h4>
-            <span class="count">10</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-
-        <div class="rub rub-economies">
-          <div class="rub-top">
-            <h4>Économies</h4>
-            <span class="count">10</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-
-        <div class="rub rub-nouveautes">
-          <div class="rub-top">
-            <h4>Nouveautés</h4>
-            <span class="count">10</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-
-        <div class="rub rub-blog">
-          <div class="rub-top">
-            <h4>Blog</h4>
-            <span class="count">∞</span>
-          </div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- NEWSLETTER -->
-    <section style="padding:0; border:none;">
-      <div class="newsletter">
-        <div>
-          <h3>Astuces hebdo gratuites</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        </div>
-
-        <form class="nl-form" onsubmit="event.preventDefault(); alert('Démo : inscription newsletter');">
-          <input type="email" required placeholder="Ton email" aria-label="Email newsletter" />
-          <button type="submit">S'inscrire</button>
-        </form>
-      </div>
-    </section>
-  </main>
-
+  <!-- FOOTER -->
   <footer>
-    <div class="footer-grid">
-      <div>
-        <div class="brand" style="margin-bottom:12px;">
-          <span class="logo-dot" aria-hidden="true" style="background:#10B981;"></span>
-          <span>Je Conduis</span>
-        </div>
-        <div>© 2026 — Lorem ipsum dolor sit amet.</div>
-      </div>
-
-      <div class="footer-links">
-        <a href="#">Mentions légales</a>
-        <a href="#">CGU</a>
-        <a href="#">Contact</a>
-        <a href="#">YouTube</a>
-        <a href="#">Instagram</a>
-        <a href="#">Facebook</a>
-      </div>
+    <div class="footer-content">
+      <p>&copy; 2026 Je Conduis — Tous droits réservés | <a href="#">Mentions</a> | <a href="#">Contact</a></p>
     </div>
   </footer>
-
-  <!-- Modal -->
-  <div class="modal" id="modal-lead" role="dialog" aria-modal="true" aria-label="Checklist Achat VO">
-    <div class="modal-card">
-      <div class="modal-head">
-        <h3>Checklist Achat VO (PDF)</h3>
-        <button class="close" data-close-modal="lead" aria-label="Fermer">Fermer</button>
-      </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.</p>
-      <div class="row">
-        <input type="email" placeholder="Ton email" aria-label="Email" />
-        <button onclick="alert('Démo : PDF envoyé');">Recevoir le PDF</button>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    const modal = document.getElementById('modal-lead');
-    document.querySelectorAll('[data-open-modal="lead"]').forEach(el => {
-      el.addEventListener('click', (e) => { e.preventDefault(); modal.setAttribute('open',''); });
-    });
-    document.querySelectorAll('[data-close-modal="lead"]').forEach(el => {
-      el.addEventListener('click', () => modal.removeAttribute('open'));
-    });
-    modal.addEventListener('click', (e) => { if(e.target === modal) modal.removeAttribute('open'); });
-  </script>
 </body>
 </html>

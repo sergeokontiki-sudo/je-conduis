@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Réparations Pratiques — Je Conduis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&family=Roboto:wght@500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{
+      --eco-primary: #10B981; --eco-secondary: #34D399; --eco-blue: #0EA5E9;
+      --eco-yellow: #FCD34D; --eco-grey: #6B7280; --eco-light: #E5E7EB;
+      --eco-white: #F8FAFC; --eco-dark: #111827;
+      --category-color: #10B981; /* VERT Réparations */
+      --radius: 0px; --shadow: 0 2px 8px rgba(17,24,39,0.08); --max: 100%;
+    }
+    /* [COPIER TOUT LE CSS DU TEMPLATE INDEX.HTML ICI] */
+    * { box-sizing: border-box; }
+    html,body { height:100%; margin:0; }
+    body { margin:0; font-family: Inter, sans-serif; color: var(--eco-dark); background: #fff; }
+    a { color: var(--eco-blue); text-decoration: none; }
+    a:hover { color: var(--eco-secondary); }
+    .container { max-width: var(--max); margin: 0 auto; padding: 0 clamp(18px,3vw,60px); }
+    
+    header { position: sticky; top:0; z-index: 50; backdrop-filter: blur(10px); background: rgba(248,250,252,0.98); border-bottom: 2px solid var(--eco-light); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:20px; padding: 16px clamp(18px,3vw,60px); max-width: 1920px; margin: 0 auto; }
+    .brand { display:flex; align-items:center; gap:10px; font-family: Montserrat, sans-serif; font-weight: 700; color: var(--eco-dark); }
+    nav ul { list-style:none; display:flex; gap: 20px; padding:0; margin:0; font-size: 14px; }
+    .nav-cta { font-family: Roboto, sans-serif; font-weight: 500; padding: 12px 18px; border-radius: 0; background: var(--eco-primary); color: #fff; }
+    
+    .breadcrumb { padding: clamp(20px,3vw,40px) clamp(18px,3vw,60px); background: var(--eco-light); font-size: 14px; color: var(--eco-grey); max-width: 1920px; margin: 0 auto; }
+    .breadcrumb a { color: var(--eco-blue); }
+    
+    .category-hero { background: linear-gradient(135deg, var(--category-color) 0%, #059669 100%); padding: clamp(60px,10vw,120px) clamp(18px,3vw,60px); color: #fff; text-align: center; }
+    .category-hero h1 { font-family: Montserrat, sans-serif; font-size: clamp(36px,6vw,64px); margin: 0 0 20px; }
+    .category-hero p { font-size: clamp(16px,2vw,22px); max-width: 60ch; margin: 0 auto 32px; opacity: 0.95; }
+    .category-hero .stats { display: flex; gap: 40px; justify-content: center; flex-wrap: wrap; }
+    .stat-item { text-align: center; }
+    .stat-number { font-family: Montserrat, sans-serif; font-size: clamp(32px,5vw,56px); font-weight: 700; display: block; }
+    .stat-label { font-size: 14px; opacity: 0.90; text-transform: uppercase; }
+    
+    section { padding: clamp(40px,6vw,80px) 0; }
+    .section-title { padding: 0 clamp(18px,3vw,60px); margin-bottom: clamp(20px,3vw,40px); max-width: 1920px; margin-left: auto; margin-right: auto; }
+    .section-title h2 { font-family: Montserrat, sans-serif; font-size: clamp(28px,4vw,48px); margin: 0 0 12px; }
+    .section-title p { color: var(--eco-grey); font-size: clamp(14px,1.5vw,18px); margin: 0; }
+    
+    .grid-3 { display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2px; background: var(--eco-light); max-width: 1920px; margin: 0 auto; }
+    .card { background:#fff; border-radius: 0; overflow:hidden; transition: all 250ms; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(17,24,39,0.15); }
+    .card img { width:100%; height: 220px; object-fit: cover; display:block; }
+    .card-body { padding: clamp(20px,3vw,32px); }
+    .tag { background: rgba(16,185,129,0.10); border: 2px solid rgba(16,185,129,0.30); color: var(--category-color); padding: 6px 12px; border-radius: 0; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    .card h3 { font-family: Montserrat, sans-serif; font-size: clamp(16px,1.5vw,20px); margin: 12px 0 8px; }
+    .card p { color: var(--eco-grey); font-size: clamp(13px,1.2vw,15px); line-height: 1.6; margin: 0; }
+    .read-more { display: inline-flex; align-items: center; gap: 8px; color: var(--category-color); font-weight: 600; margin-top: 16px; }
+    
+    footer { padding: clamp(40px,5vw,60px) clamp(18px,3vw,60px); background: var(--eco-dark); color: rgba(255,255,255,0.70); }
+    .footer-grid { display:flex; justify-content:space-between; gap: 24px; flex-wrap: wrap; max-width: 1920px; margin: 0 auto; border-top: 2px solid rgba(255,255,255,0.10); padding-top: 24px; }
+    
+    @media (max-width: 980px) { 
+      nav ul { display:none; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="index.html">Je Conduis</a>
+      <nav>
+        <ul>
+          <li><a href="reparations.html">Réparations</a></li>
+          <li><a href="assurance.html">Assurance</a></li>
+          <li><a href="achat.html">Achat</a></li>
+          <li><a href="vente.html">Vente</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="economies.html">Économies</a></li>
+          <li><a href="nouveautes.html">Nouveautés</a></li>
+          <li><a class="nav-cta" href="#">Checklist VO</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a> › Réparations
+    </div>
+
+    <div class="category-hero">
+      <h1>Réparations Pratiques</h1>
+      <p>Tutos vidéo, guides pas à pas et checklists PDF pour entretenir ta voiture toi-même et économiser des centaines d'euros par an</p>
+      <div class="stats">
+        <div class="stat-item">
+          <span class="stat-number">15</span>
+          <span class="stat-label">Tutos complets</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">80€</span>
+          <span class="stat-label">Économie moyenne</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">30min</span>
+          <span class="stat-label">Temps moyen</span>
+        </div>
+      </div>
+    </div>
+
+    <section>
+      <div class="section-title">
+        <h2>Guides de réparation</h2>
+        <p>Étapes détaillées, matériel nécessaire et pièges à éviter</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <img alt="Vidange" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%2310B981'/><text x='80' y='200' font-family='Inter' font-size='60' fill='%23fff' font-weight='700'>Vidange</text></svg>">
+          <div class="card-body">
+            <span class="tag">Entretien</span>
+            <h3><a href="article-vidange.html">Vidange maison : 30 min, 80€ économisés</a></h3>
+            <p>Guide complet pour Clio, 208, Mégane. Matériel nécessaire, huiles recommandées, étapes détaillées et tableau économies par modèle.</p>
+            <a href="article-vidange.html" class="read-more">Lire le guide →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Freins" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%23059669'/><text x='80' y='200' font-family='Inter' font-size='60' fill='%23fff' font-weight='700'>Freins</text></svg>">
+          <div class="card-body">
+            <span class="tag">Sécurité</span>
+            <h3>Changer ses plaquettes de frein soi-même</h3>
+            <p>Signes d'usure, outils nécessaires, démontage sécurisé. Économise 120€ en 45 minutes. Vidéo + checklist PDF.</p>
+            <a href="#" class="read-more">Voir le tuto →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Batterie" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%2334D399'/><text x='80' y='200' font-family='Inter' font-size='60' fill='%23111827' font-weight='700'>Batterie</text></svg>">
+          <div class="card-body">
+            <span class="tag">Diagnostic</span>
+            <h3>Batterie : signes de panne et remplacement</h3>
+            <p>Démarrage difficile ? Voyants allumés ? Teste ta batterie en 5 min, choisis la bonne référence et remplace en 20 min.</p>
+            <a href="#" class="read-more">Guide PDF →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Pneus" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%2310B981'/><text x='80' y='200' font-family='Inter' font-size='60' fill='%23fff' font-weight='700'>Pneus</text></svg>">
+          <div class="card-body">
+            <span class="tag">Contrôle</span>
+            <h3>Contrôler et gonfler ses pneus correctement</h3>
+            <p>Pression idéale par modèle, contrôle usure, rotation pneus. Réduis ta conso de 10% et prolonge leur durée de vie.</p>
+            <a href="#" class="read-more">Checklist →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Courroie" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%23059669'/><text x='80' y='200' font-family='Inter' font-size='50' fill='%23fff' font-weight='700'>Distribution</text></svg>">
+          <div class="card-body">
+            <span class="tag">Préventif</span>
+            <h3>Courroie de distribution : quand la changer ?</h3>
+            <p>Kilométrage recommandé par marque, symptômes, prix garage vs kit à faire soi-même. Évite la casse moteur.</p>
+            <a href="#" class="read-more">Calendrier →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Filtres" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%2334D399'/><text x='80' y='200' font-family='Inter' font-size='60' fill='%23111827' font-weight='700'>Filtres</text></svg>">
+          <div class="card-body">
+            <span class="tag">Entretien</span>
+            <h3>Remplacer ses filtres : air, huile, habitacle</h3>
+            <p>Fréquences recommandées, impact sur consommation et santé. 3 filtres changés en 15 min pour 30€.</p>
+            <a href="#" class="read-more">Mode d'emploi →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>© 2026 Je Conduis</div>
+      <div><a href="#">Mentions</a> | <a href="#">Contact</a></div>
+    </div>
+  </footer>
+</body>
+</html>

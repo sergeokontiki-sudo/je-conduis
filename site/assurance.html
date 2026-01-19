@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Assurance Auto — Je Conduis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&family=Roboto:wght@500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root{
+      --eco-primary: #10B981; --eco-secondary: #34D399; --eco-blue: #0EA5E9;
+      --eco-yellow: #FCD34D; --eco-grey: #6B7280; --eco-light: #E5E7EB;
+      --eco-white: #F8FAFC; --eco-dark: #111827;
+      --category-color: #0EA5E9; /* BLEU Assurance */
+      --radius: 0px; --max: 100%;
+    }
+    /* [MÊME CSS QUE REPARATIONS.HTML] */
+    * { box-sizing: border-box; }
+    html,body { height:100%; margin:0; }
+    body { margin:0; font-family: Inter, sans-serif; color: var(--eco-dark); background: #fff; }
+    a { color: var(--eco-blue); text-decoration: none; }
+    a:hover { color: var(--eco-secondary); }
+    
+    header { position: sticky; top:0; z-index: 50; backdrop-filter: blur(10px); background: rgba(248,250,252,0.98); border-bottom: 2px solid var(--eco-light); }
+    .nav { display:flex; align-items:center; justify-content:space-between; gap:20px; padding: 16px clamp(18px,3vw,60px); max-width: 1920px; margin: 0 auto; }
+    .brand { display:flex; align-items:center; gap:10px; font-family: Montserrat, sans-serif; font-weight: 700; color: var(--eco-dark); }
+    nav ul { list-style:none; display:flex; gap: 20px; padding:0; margin:0; font-size: 14px; }
+    .nav-cta { font-family: Roboto, sans-serif; font-weight: 500; padding: 12px 18px; border-radius: 0; background: var(--eco-primary); color: #fff; }
+    
+    .breadcrumb { padding: clamp(20px,3vw,40px) clamp(18px,3vw,60px); background: var(--eco-light); font-size: 14px; color: var(--eco-grey); max-width: 1920px; margin: 0 auto; }
+    .breadcrumb a { color: var(--eco-blue); }
+    
+    .category-hero { background: linear-gradient(135deg, var(--category-color) 0%, #0284c7 100%); padding: clamp(60px,10vw,120px) clamp(18px,3vw,60px); color: #fff; text-align: center; }
+    .category-hero h1 { font-family: Montserrat, sans-serif; font-size: clamp(36px,6vw,64px); margin: 0 0 20px; }
+    .category-hero p { font-size: clamp(16px,2vw,22px); max-width: 60ch; margin: 0 auto; opacity: 0.95; }
+    
+    section { padding: clamp(40px,6vw,80px) 0; }
+    .section-title { padding: 0 clamp(18px,3vw,60px); margin-bottom: clamp(20px,3vw,40px); max-width: 1920px; margin-left: auto; margin-right: auto; }
+    .section-title h2 { font-family: Montserrat, sans-serif; font-size: clamp(28px,4vw,48px); margin: 0 0 12px; }
+    .section-title p { color: var(--eco-grey); font-size: clamp(14px,1.5vw,18px); margin: 0; }
+    
+    .grid-3 { display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2px; background: var(--eco-light); max-width: 1920px; margin: 0 auto; }
+    .card { background:#fff; border-radius: 0; overflow:hidden; transition: all 250ms; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(17,24,39,0.15); }
+    .card img { width:100%; height: 220px; object-fit: cover; display:block; }
+    .card-body { padding: clamp(20px,3vw,32px); }
+    .tag { background: rgba(14,165,233,0.10); border: 2px solid rgba(14,165,233,0.30); color: var(--category-color); padding: 6px 12px; border-radius: 0; font-size: 12px; font-weight: 600; text-transform: uppercase; }
+    .card h3 { font-family: Montserrat, sans-serif; font-size: clamp(16px,1.5vw,20px); margin: 12px 0 8px; }
+    .card p { color: var(--eco-grey); font-size: clamp(13px,1.2vw,15px); line-height: 1.6; margin: 0; }
+    .read-more { display: inline-flex; align-items: center; gap: 8px; color: var(--category-color); font-weight: 600; margin-top: 16px; }
+    
+    footer { padding: clamp(40px,5vw,60px) clamp(18px,3vw,60px); background: var(--eco-dark); color: rgba(255,255,255,0.70); }
+    .footer-grid { display:flex; justify-content:space-between; gap: 24px; flex-wrap: wrap; max-width: 1920px; margin: 0 auto; }
+    
+    @media (max-width: 980px) { 
+      nav ul { display:none; }
+      .grid-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <a class="brand" href="index.html">Je Conduis</a>
+      <nav>
+        <ul>
+          <li><a href="reparations.html">Réparations</a></li>
+          <li><a href="assurance.html">Assurance</a></li>
+          <li><a href="achat.html">Achat</a></li>
+          <li><a href="vente.html">Vente</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="economies.html">Économies</a></li>
+          <li><a href="nouveautes.html">Nouveautés</a></li>
+          <li><a class="nav-cta" href="#">Checklist VO</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="breadcrumb">
+      <a href="index.html">Accueil</a> › Assurance Auto
+    </div>
+
+    <div class="category-hero">
+      <h1>Assurance Auto</h1>
+      <p>Comparatifs 2026, guides garanties, simulateurs et astuces pour économiser jusqu'à 300€/an sur ton assurance auto</p>
+    </div>
+
+    <section>
+      <div class="section-title">
+        <h2>Guides assurance</h2>
+        <p>Comprendre, comparer et économiser</p>
+      </div>
+
+      <div class="grid-3">
+        <article class="card">
+          <img alt="Comparatif" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%230EA5E9'/><text x='80' y='200' font-family='Inter' font-size='50' fill='%23fff' font-weight='700'>Top 5</text></svg>">
+          <div class="card-body">
+            <span class="tag">Comparatif</span>
+            <h3>Meilleure assurance auto 2026 : Top 5</h3>
+            <p>Classement prix/garanties pour jeunes conducteurs, seniors, électrique. Tableau comparatif franchises, bonus/malus, services inclus.</p>
+            <a href="#" class="read-more">Comparer →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Franchise" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%230284c7'/><text x='80' y='200' font-family='Inter' font-size='50' fill='%23fff' font-weight='700'>Franchise</text></svg>">
+          <div class="card-body">
+            <span class="tag">Guide</span>
+            <h3>Franchise assurance auto : tout comprendre</h3>
+            <p>C'est quoi une franchise ? Franchise absolue vs relative, moyennes 2026, pièges à éviter. Calculateur franchise optimale.</p>
+            <a href="#" class="read-more">Lire le guide →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Jeune conducteur" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%2338bdf8'/><text x='80' y='200' font-family='Inter' font-size='45' fill='%23111827' font-weight='700'>Jeune</text></svg>">
+          <div class="card-body">
+            <span class="tag">Jeune conducteur</span>
+            <h3>Assurance jeune conducteur : 5 astuces</h3>
+            <p>Conduite accompagnée, assurance au km, garantie au tiers. Économise jusqu'à 40% avec ces 5 techniques validées.</p>
+            <a href="#" class="read-more">Astuces →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Tous risques vs tiers" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%230EA5E9'/><text x='80' y='200' font-family='Inter' font-size='50' fill='%23fff' font-weight='700'>TR vs Tiers</text></svg>">
+          <div class="card-body">
+            <span class="tag">Choix</span>
+            <h3>Tous risques ou au tiers : lequel choisir ?</h3>
+            <p>Différences garanties, prix moyen, critères de choix selon âge voiture. Simulateur comparatif intégré.</p>
+            <a href="#" class="read-more">Simuler →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Sinistre" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%230284c7'/><text x='80' y='200' font-family='Inter' font-size='50' fill='%23fff' font-weight='700'>Sinistre</text></svg>">
+          <div class="card-body">
+            <span class="tag">Démarche</span>
+            <h3>Déclarer un sinistre : étapes et délais</h3>
+            <p>Constat amiable, photos à prendre, délais légaux (5 jours). Checklist PDF + modèles courriers inclus.</p>
+            <a href="#" class="read-more">Checklist PDF →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img alt="Résiliation" src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='700'><rect width='1200' height='700' fill='%2338bdf8'/><text x='80' y='200' font-family='Inter' font-size='50' fill='%23111827' font-weight='700'>Résiliation</text></svg>">
+          <div class="card-body">
+            <span class="tag">Administratif</span>
+            <h3>Résilier son assurance auto : mode d'emploi</h3>
+            <p>Loi Hamon, échéance annuelle, vente véhicule. Modèle lettre résiliation + délais à respecter.</p>
+            <a href="#" class="read-more">Modèle lettre →</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-grid">
+      <div>© 2026 Je Conduis</div>
+      <div><a href="#">Mentions</a> | <a href="#">Contact</a></div>
+    </div>
+  </footer>
+</body>
+</html>
